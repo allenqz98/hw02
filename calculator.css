@@ -1,0 +1,48 @@
+#display {
+  font-size: 20px;
+  text-align: right;
+}
+
+body {
+  background-color: pink;
+}
+
+a {
+  text-align: left;
+  font-family: arial, sans-serif;
+}
+
+h1 {
+  color: grey;
+  text-align: center;
+}
+
+#display {
+  border: 2px solid grey;
+  width:200px;
+  padding: 10px;
+  margin-left:auto;
+  margin-right:auto;
+}
+
+table {
+  font-family: arial, sans-serif;
+  border: 2px solid grey;
+  border-collapse: collapse;
+  margin-left:auto;
+  margin-right:auto;
+}
+
+td {
+  text-align: center;
+  padding: 2px;
+}
+
+button {
+  padding: 3px 12px;
+  cursor: pointer;
+  display:inline-block;
+  width:50px;
+  height:30px;
+  border-radius: 10px;
+}
