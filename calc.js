@@ -1,4 +1,3 @@
-
 document.getElementById('0').addEventListener("click",function(){number(0)})
 document.getElementById('1').addEventListener("click",function(){number(1)})
 document.getElementById('2').addEventListener("click",function(){number(2)})
@@ -16,100 +15,89 @@ document.getElementById('x').addEventListener("click",function(){operation("x")}
 document.getElementById('-').addEventListener("click",function(){operation("-")})
 document.getElementById('+/=').addEventListener("click",function(){operation("+/=")})
 
-
-var prev_num = '';
-var cur_num = '';
-var op;
-var result = '';
-var dotted = false;
-var display = document.getElementById("display");
+var calc = {prev_num:'', cur_num:'', op:'', display:document.getElementById("display")};
 
 function number(number) {
-  if (cur_num == '') {
-    dotted = false;
-    display.innerHTML = number;
-    cur_num = number;
+  if (calc.cur_num == '') {
+    calc.display.innerHTML = number;
+    calc.cur_num = number;
 
   }
   else {
-    cur_num = parseFloat(display.innerHTML + number);
-    display.innerHTML = display.innerHTML + number;
+    calc.cur_num = parseFloat(calc.display.innerHTML + number);
+    calc.display.innerHTML = calc.display.innerHTML + number;
   }
 }
 
 function dot() {
- 
-  if (dotted == false && display.innerHTML.indexOf('.') < 0){
-    display.innerHTML = display.innerHTML + '.';
-    cur_num ='0.'
-    dotted = true;
+  if (calc.display.innerHTML.indexOf(".") < 0 && calc.cur_num !== ''){
+    calc.display.innerHTML = calc.display.innerHTML + '.';
+    calc.cur_num ='0.'
   }
 }
 
 function reset() {
-  if (cur_num == '') {
-    prev_num = '';
-    op = "";
+  if (calc.cur_num == '') {
+    calc.prev_num = '';
+    calc.op = "";
   }
   else {
-    cur_num = '';
+    calc.cur_num = '';
   }
-  display.innerHTML = 0;
+  calc.display.innerHTML = 0;
 
 }
 
 function operation(string) {
-  if (prev_num === '') {
-    prev_num = cur_num;
-    cur_num = '';
+  if (calc.prev_num === '') {
+    calc.prev_num = calc.cur_num;
+    calc.cur_num = '';
   }
-  else if (cur_num !== '') {
+  else if (calc.cur_num !== '') {
     getResult();
   }
-  op = string;
+  calc.op = string;
 
 }
 
 function getResult() {
-  switch (op) {
+  let result = '';
+  switch (calc.op) {
     case "+/=":
-    total = parseFloat(prev_num) + parseFloat(cur_num);
-    display.innerHTML = total;
-    prev_num = total;
-    cur_num = '';
+    total = parseFloat(calc.prev_num) + parseFloat(calc.cur_num);
+    calc.display.innerHTML = total;
+    calc.prev_num = total;
+    calc.cur_num = '';
     break;
 
     case "-":
-    total = prev_num - cur_num;
-    display.innerHTML = total;
-    prev_num = total;
-    cur_num = '';
+    total = calc.prev_num - calc.cur_num;
+    calc.display.innerHTML = total;
+    calc.prev_num = total;
+    calc.cur_num = '';
     break;
 
     case "x":
-    total = prev_num * cur_num;
-    display.innerHTML = total;
-    prev_num = total;
-    cur_num = '';
+    total = calc.prev_num * calc.cur_num;
+    calc.display.innerHTML = total;
+    calc.prev_num = total;
+    calc.cur_num = '';
     break;
 
     case "/":
-    if (cur_num == 0) {
-      display.innerHTML = "Error";
-      prev_num = 0;
-      cur_num = 0;
+    if (calc.cur_num == 0) {
+      calc.display.innerHTML = "Error";
+      calc.prev_num = 0;
+      calc.cur_num = 0;
     }
     else {
-    total = prev_num / cur_num;
-    display.innerHTML = total;
-    prev_num = total;
-    cur_num = '';
+    total = calc.prev_num / calc.cur_num;
+    calc.display.innerHTML = total;
+    calc.prev_num = total;
+    calc.cur_num = '';
   }
     break;
 
     default:
-  }
-  if (!total.isInteger()) {
-    alert("Int");
   }
 }
